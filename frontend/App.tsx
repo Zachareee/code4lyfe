@@ -10,11 +10,15 @@ type innerMedProps = {
 
 const MedInnerRow = (props: innerMedProps) => {
   return (
-    <View style={styles.medrow}>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
-       style={{width: 40, height: 40}} />
-      <Text>Hello {props.name} {props.image}!</Text>
-      <Text> {props.name} </Text>
+    <View style={styles.card}>
+      <View style = {{flexDirection: "row", backgroundColor: "#FFFFFF"}}>
+        <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
+        style={styles.image} />
+        <Text style = {styles.nameText}>Hello {props.name} {props.image}!</Text>
+      </View>
+      <View>
+         <Text style = {{backgroundColor: '#000000'}}> {props.name} </Text>
+      </View>
       </View>
   );
 };
@@ -35,43 +39,19 @@ const MedRow = (props: medProps) => {
     return (
       // <Text> Yippee </Text>
       <View>
-        <View style={styles.medrow}>
+        <View>
           <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
-          style={{width: 40, height: 40}} />
+          style={{width: 40, height: 0}} />
           <Text>Hello {props.name} {props.image}!</Text>
           <Text> {props.name} </Text>
         </View>
-        <View style={styles.center}>
-          <Text> {props.info} </Text>
+        <View style={styles.textContainer}>
+          <Text style = {styles.infoText}> {props.info} </Text>
         </View>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 22,
-  },
-  item: {
-    padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  medrow: {
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    padding: 10,
-    justifyContent: 'space-between',
-  },
-  center: {
-    alignItems: 'center',
-    backgroundColor: '#00BBB0',
-    borderColor: '#000000',
-    borderWidth: 1,
-  },
-});
 
 const FlatListBasics = () => {
   return (
@@ -91,7 +71,7 @@ const FlatListBasics = () => {
         ]}
 
         renderItem={({item}) => <MedRow name = {item.key} image = {item.surname} info = {(item.info)} />}
-        
+        ItemSeparatorComponent={() => <View style = {styles.separator}/>}
         // renderItem={({item}) => <Text style={styles.item}>{item.key} {item.surname}</Text>}
       />
     </View>
@@ -102,7 +82,7 @@ const DateDisplay = () => {
   const today = new Date()
   return (
   <View>
-  <Text> {today.toLocaleDateString("en-GB", 
+  <Text style={styles.dateText}> {today.toLocaleDateString("en-GB", 
           { weekday: 'long',  day: 'numeric', month: 'long' }
     )}</Text>
     </View>
@@ -121,11 +101,65 @@ const App = () => {
         },
       ]}>
     <DateDisplay></DateDisplay>
+    
     <FlatListBasics></FlatListBasics>
   </View>
   )
 };
 
 
+const styles = StyleSheet.create({
+  dateText:{
+    fontSize:14,
+    color:'#000',
+    fontStyle:'italic'
+  },
+  container: {
+    flex: 1,
+    paddingTop: 22,
+    paddingHorizontal: 10,
+    backgroundColor: '#558D97',
+  },
+  card: {
+    alignItems:'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    backgroundColor: '#C4DDDE',
+    borderRadius: 8,
+    padding: 10,
+    marginVertical: 5,
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    elevation: 3,
+  },
+  image: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    marginRight: 15,
+  },
+  textContainer: {
+    justifyContent: 'center',
+    flex: 1,
+  },
+  nameText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  infoText: {
+    fontSize: 14,
+    color: '#666',
+    marginTop: 5,
+  },
+  separator: {
+    height: 10,
+  },
+});
+
+
+
 // export default FlatListBasics;
 export default App;
+
