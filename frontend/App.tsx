@@ -1,23 +1,12 @@
 import React from 'react';
-import {Text, View, Button, StyleSheet, Image, FlatList} from 'react-native';
+import {View, Text, Button, FlatList} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator} from '@react-navigation/stack';
+import { RootStackParamList } from './scripts/Navigation';
 
-
-// const HomeScreen = ({navigation}) => {
-//   return (
-//     <Button
-//       title="Go to Jane's profile"
-//       onPress={() =>
-//         navigation.navigate('Profile', {name: 'Jane'})
-//       }
-//     />
-//   );
-// };
-// const ProfileScreen = ({navigation, route}) => {
-//   return <Text>This is {route.params.name}'s profile</Text>;
-// };
-
+import styles from "./scripts/styles";
+import MedRow from "./scripts/MedRow";
+import DateDisplay from './scripts/DateDisplay';
 
 // const Stack = createNativeStackNavigator();
 
@@ -35,60 +24,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 //     </NavigationContainer>
 //   );
 // };
-
-
-
-
-type innerMedProps = {
-    name: string;
-    image: string;
-    time?: Date;
-  };
-
-const MedInnerRow = (props: innerMedProps) => {
-  return (
-    <View style={styles.card}>
-      <View style = {{flexDirection: "row", backgroundColor: "#FFFFFF"}}>
-        <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
-        style={styles.image} />
-        <Text style = {styles.nameText}>Hello {props.name} {props.image}!</Text>
-      </View>
-      <View>
-         <Text style = {{backgroundColor: '#000000'}}> {props.name} </Text>
-      </View>
-      </View>
-  );
-};
-
-type medProps = {
-  name: string;
-  image: string;
-  time?: Date;
-  info?: string;
-};
-
-const MedRow = (props: medProps) => {
-  if (props.info == null) {
-    return (
-      <MedInnerRow name = {props.name} image = {props.image} />
-    )
-  } else {
-    return (
-      // <Text> Yippee </Text>
-      <View>
-        <View>
-          <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
-          style={{width: 40, height: 0}} />
-          <Text>Hello {props.name} {props.image}!</Text>
-          <Text> {props.name} </Text>
-        </View>
-        <View style={styles.textContainer}>
-          <Text style = {styles.infoText}> {props.info} </Text>
-        </View>
-      </View>
-    );
-  }
-}
 
 const FlatListBasics = () => {
   return (
@@ -115,87 +50,29 @@ const FlatListBasics = () => {
   );
 };
 
-const DateDisplay = () => {
-  const today = new Date()
-  return (
-  <View>
-  <Text style={styles.dateText}> {today.toLocaleDateString("en-GB", 
-          { weekday: 'long',  day: 'numeric', month: 'long' }
-    )}</Text>
-    </View>
-  );
-};
-
-const App = () => {
+const Stack = createStackNavigator<RootStackParamList>();
+const HomeScreen = () => {
   return(
-  // <NavigationContainer>
     <View
         style={[
-          styles.container,
-          {
-            // Try setting `flexDirection` to `"row"`.
-            flexDirection: 'column',
-          },
+          styles.container, {flexDirection: 'column',},
         ]}>
+
       <DateDisplay></DateDisplay>
       <FlatListBasics></FlatListBasics>
     </View>
-  // </NavigationContainer>
+  )
+}
 
+const App = () => {
+  return(
+  <NavigationContainer>
+    <Stack.Navigator>
+          <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+  </ NavigationContainer>
   )
 };
-
-
-const styles = StyleSheet.create({
-  dateText:{
-    fontSize:14,
-    color:'#000',
-    fontStyle:'italic'
-  },
-  container: {
-    flex: 1,
-    paddingTop: 22,
-    paddingHorizontal: 10,
-    backgroundColor: '#558D97',
-  },
-  card: {
-    alignItems:'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-    backgroundColor: '#C4DDDE',
-    borderRadius: 8,
-    padding: 10,
-    marginVertical: 5,
-    shadowColor: '#000',
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
-    elevation: 3,
-  },
-  image: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 15,
-  },
-  textContainer: {
-    justifyContent: 'center',
-    flex: 1,
-  },
-  nameText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  infoText: {
-    fontSize: 14,
-    color: '#666',
-    marginTop: 5,
-  },
-  separator: {
-    height: 10,
-  },
-});
-
 
 
 export default App;
