@@ -20,12 +20,6 @@ Make sure you have the following installed:
 git clone https://github.com/Zachareee/coder4lyfe.git
 ```
 
-4. Navigate into the project directory:
-
-```sh
-cd your-repository-name
-```
-
 ## Installing Dependencies
 1. In the project directory, run the following command to install the necessary dependencies:
 
