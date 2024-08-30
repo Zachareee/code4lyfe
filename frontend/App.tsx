@@ -25,23 +25,27 @@ type medProps = {
   time?: Date;
   info?: string;
 };
+
 const MedRow = (props: medProps) => {
   if (props.info == null) {
-    return MedInnerRow;
+    return (
+      <MedInnerRow name = {props.name} image = {props.image} />
+    )
   } else {
     return (
+      // <Text> Yippee </Text>
       <View>
         <View style={styles.medrow}>
           <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
           style={{width: 40, height: 40}} />
           <Text>Hello {props.name} {props.image}!</Text>
           <Text> {props.name} </Text>
-        </View>;
-        <View style={styles.medrow}>
+        </View>
+        <View style={styles.center}>
           <Text> {props.info} </Text>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -63,6 +67,9 @@ const styles = StyleSheet.create({
   },
   center: {
     alignItems: 'center',
+    backgroundColor: '#00BBB0',
+    borderColor: '#000000',
+    borderWidth: 1,
   },
 });
 
@@ -73,17 +80,17 @@ const FlatListBasics = () => {
         data={[
           {key: 'Devin', surname: 'love'},
           {key: 'Dan', surname: 'love'},
-          {key: 'Dominic', surname: 'love'},
+          {key: 'Dominic', surname: 'love', info: 'aaaaa'},
           {key: 'Jackson', surname: 'love'},
           {key: 'James', surname: 'love'},
-          {key: 'Joel', surname: 'love'},
+          {key: 'Joel', surname: 'love', info: 'aaaaaaaaaaa'},
           {key: 'John', surname: 'love'},
           {key: 'Jillian', surname: 'love'},
           {key: 'Jimmy', surname: 'love'},
           {key: 'Julie', surname: 'love'},
         ]}
 
-        renderItem={({item}) => <MedInnerRow name = {item.key} image = {item.surname}/>}
+        renderItem={({item}) => <MedRow name = {item.key} image = {item.surname} info = {(item.info)} />}
         
         // renderItem={({item}) => <Text style={styles.item}>{item.key} {item.surname}</Text>}
       />
