@@ -1,118 +1,124 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {Text, View, StyleSheet, Image, FlatList} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+type innerMedProps = {
+    name: string;
+    image: string;
+    time?: Date;
   };
 
+const MedInnerRow = (props: innerMedProps) => {
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <View style={styles.medrow}>
+      <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
+       style={{width: 40, height: 40}} />
+      <Text>Hello {props.name} {props.image}!</Text>
+      <Text> {props.name} </Text>
+      </View>
   );
+};
+
+type medProps = {
+  name: string;
+  image: string;
+  time?: Date;
+  info?: string;
+};
+const MedRow = (props: medProps) => {
+  if (props.info == null) {
+    return MedInnerRow;
+  } else {
+    return (
+      <View>
+        <View style={styles.medrow}>
+          <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
+          style={{width: 40, height: 40}} />
+          <Text>Hello {props.name} {props.image}!</Text>
+          <Text> {props.name} </Text>
+        </View>;
+        <View style={styles.medrow}>
+          <Text> {props.info} </Text>
+        </View>
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+  container: {
+    flex: 1,
+    paddingTop: 22,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
+  item: {
+    padding: 10,
     fontSize: 18,
-    fontWeight: '400',
+    height: 44,
   },
-  highlight: {
-    fontWeight: '700',
+  medrow: {
+    flexDirection: 'row',
+    alignItems: 'stretch',
+    padding: 10,
+    justifyContent: 'space-between',
+  },
+  center: {
+    alignItems: 'center',
   },
 });
 
+const FlatListBasics = () => {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={[
+          {key: 'Devin', surname: 'love'},
+          {key: 'Dan', surname: 'love'},
+          {key: 'Dominic', surname: 'love'},
+          {key: 'Jackson', surname: 'love'},
+          {key: 'James', surname: 'love'},
+          {key: 'Joel', surname: 'love'},
+          {key: 'John', surname: 'love'},
+          {key: 'Jillian', surname: 'love'},
+          {key: 'Jimmy', surname: 'love'},
+          {key: 'Julie', surname: 'love'},
+        ]}
+
+        renderItem={({item}) => <MedInnerRow name = {item.key} image = {item.surname}/>}
+        
+        // renderItem={({item}) => <Text style={styles.item}>{item.key} {item.surname}</Text>}
+      />
+    </View>
+  );
+};
+
+const DateDisplay = () => {
+  const today = new Date()
+  return (
+  <View>
+  <Text> {today.toLocaleDateString("en-GB", 
+          { weekday: 'long',  day: 'numeric', month: 'long' }
+    )}</Text>
+    </View>
+  );
+};
+
+
+const App = () => {
+  return(
+  <View
+      style={[
+        styles.container,
+        {
+          // Try setting `flexDirection` to `"row"`.
+          flexDirection: 'column',
+        },
+      ]}>
+    <DateDisplay></DateDisplay>
+    <FlatListBasics></FlatListBasics>
+  </View>
+  )
+};
+
+
+// export default FlatListBasics;
 export default App;
