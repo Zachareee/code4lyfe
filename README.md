@@ -8,7 +8,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 ## Prerequisites
 Make sure you have the following installed:
 
-1. Node.js (which includes npm) – This project requires Node.js to run. You can check if you have it installed by running node -v and npm -v in your terminal.
+1. Node.js (which includes npm) – This project requires Node.js to run. You can check if you have it installed by running `node -v` and `npm -v` in your terminal.
 2. Git – Git is needed to clone the repository.
    
 ## Cloning the Repository
@@ -17,9 +17,8 @@ Make sure you have the following installed:
 3. Run the following command to clone the repository:
 
 ```sh
-git clone https://github.com/your-username/your-repository-name.git
+git clone https://github.com/Zachareee/coder4lyfe.git
 ```
-Replace your-username and your-repository-name with the appropriate values for your repository.
 
 4. Navigate into the project directory:
 
@@ -33,7 +32,7 @@ cd your-repository-name
 ```sh
 npm install
 ```
-This will install all the packages listed in the package.json file.
+This will install all the packages listed in the `package.json` file.
 
 ## Running the Project
 After installing the dependencies, start the development server by running:
@@ -44,34 +43,23 @@ npm start
 
 This will start the React development server and open the application in your default web browser. If it does not open automatically, you can visit `http://localhost:3000` in your browser.
 
-Building for Production
+## Building for Production
 To create an optimized build of the application for production, run:
 
 ```sh
 npm run build
 ```
 
-This will create a build directory with a production build of your app.
+This will create a `build` directory with a production build of the app.
 
-Running Tests
+## Running Tests
 To run the project's tests, use:
 
 ```sh
 npm test
 ```
 
-This will run the test suite defined in your project.
+This will run the test suite defined in the project.
 
-Contributing
-If you would like to contribute to this project, please follow these steps:
-
-Fork the repository.
-Create a new branch for your changes.
-Commit your changes.
-Push your changes to your fork.
-Open a pull request from your fork to the main repository.
-License
-This project is licensed under the MIT License.
-
-Contact
-For any questions or issues, please reach out to [your-email@example.com].
+## Contact
+For any questions or issues, please reach out to danielw.2023@scis.smu.edu.sg.
