@@ -1,5 +1,42 @@
 import React from 'react';
-import {Text, View, StyleSheet, Image, FlatList} from 'react-native';
+import {Text, View, Button, StyleSheet, Image, FlatList} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+
+
+// const HomeScreen = ({navigation}) => {
+//   return (
+//     <Button
+//       title="Go to Jane's profile"
+//       onPress={() =>
+//         navigation.navigate('Profile', {name: 'Jane'})
+//       }
+//     />
+//   );
+// };
+// const ProfileScreen = ({navigation, route}) => {
+//   return <Text>This is {route.params.name}'s profile</Text>;
+// };
+
+
+// const Stack = createNativeStackNavigator();
+
+// const MyStack = () => {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator>
+//         <Stack.Screen
+//           name="Home"
+//           component={HomeScreen}
+//           options={{title: 'Welcome'}}
+//         />
+//         <Stack.Screen name="Profile" component={ProfileScreen} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// };
+
+
 
 
 type innerMedProps = {
@@ -89,21 +126,22 @@ const DateDisplay = () => {
   );
 };
 
-
 const App = () => {
   return(
-  <View
-      style={[
-        styles.container,
-        {
-          // Try setting `flexDirection` to `"row"`.
-          flexDirection: 'column',
-        },
-      ]}>
-    <DateDisplay></DateDisplay>
-    
-    <FlatListBasics></FlatListBasics>
-  </View>
+  // <NavigationContainer>
+    <View
+        style={[
+          styles.container,
+          {
+            // Try setting `flexDirection` to `"row"`.
+            flexDirection: 'column',
+          },
+        ]}>
+      <DateDisplay></DateDisplay>
+      <FlatListBasics></FlatListBasics>
+    </View>
+  // </NavigationContainer>
+
   )
 };
 
@@ -160,6 +198,5 @@ const styles = StyleSheet.create({
 
 
 
-// export default FlatListBasics;
 export default App;
 
