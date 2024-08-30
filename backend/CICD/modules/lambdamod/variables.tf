@@ -1,9 +1,19 @@
-variable "zip_file" {
-  type = string
-  description = "The name of the zip file"
+variable "function_name" {
+  type        = string
+  description = "The name of the lambda function"
 }
 
-variable "function_name" {
-  type = string
-  description = "The name of the lambda function"
+variable "gateway_execution_arn" {
+  type        = string
+  description = "Execution ARN of gateway rest api"
+}
+
+variable "lambda_role" {
+  type        = string
+  description = "Lambda role name"
+}
+
+variable "lambda_arn" {
+  type        = string
+  description = "Lambda arn"
 }
