@@ -19,32 +19,30 @@ Make sure you have the following installed:
 ```sh
 git clone https://github.com/your-username/your-repository-name.git
 ```
-
 Replace your-username and your-repository-name with the appropriate values for your repository.
 
-Navigate into the project directory:
+4. Navigate into the project directory:
 
 ```sh
 cd your-repository-name
 ```
 
-Installing Dependencies
-In the project directory, run the following command to install the necessary dependencies:
+## Installing Dependencies
+1. In the project directory, run the following command to install the necessary dependencies:
 
 ```sh
 npm install
 ```
-
 This will install all the packages listed in the package.json file.
 
-Running the Project
+## Running the Project
 After installing the dependencies, start the development server by running:
 
 ```sh
 npm start
 ```
 
-This will start the React development server and open the application in your default web browser. If it does not open automatically, you can visit http://localhost:3000 in your browser.
+This will start the React development server and open the application in your default web browser. If it does not open automatically, you can visit `http://localhost:3000` in your browser.
 
 Building for Production
 To create an optimized build of the application for production, run:
