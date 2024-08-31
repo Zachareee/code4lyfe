@@ -1,6 +1,6 @@
 resource "null_resource" "build_script" {
   provisioner "local-exec" {
-    command = length(regexall("/home/", lower(abspath(path.root)))) > 0 ? "build.sh" : "build.bat"
+    command     = length(regexall("/home/", lower(abspath(path.root)))) > 0 ? "build.sh" : "build.bat"
     working_dir = ".."
   }
 
@@ -11,10 +11,10 @@ resource "null_resource" "build_script" {
 
 resource "aws_iam_role" "lambda_role" {
   name               = "exec_role"
-  assume_role_policy = data.aws_iam_policy_document.assume_role.json
+  assume_role_policy = data.aws_iam_policy_document.lambda_policy.json
 }
 
-data "aws_iam_policy_document" "assume_role" {
+data "aws_iam_policy_document" "lambda_policy" {
   statement {
     effect = "Allow"
 
@@ -24,5 +24,26 @@ data "aws_iam_policy_document" "assume_role" {
     }
 
     actions = ["sts:AssumeRole"]
+  }
+}
+
+data "aws_iam_policy_document" "dynamodb_policy" {
+  statement {
+    effect = "Allow"
+
+    principals {
+      type        = "Service"
+      identifiers = ["lambda.amazonaws.com"]
+    }
+
+    actions = [
+      "dynamodb:BatchGetItem",
+      "dynamodb:GetItem",
+      "dynamodb:Query",
+      "dynamodb:Scan",
+      "dynamodb:BatchWriteItem",
+      "dynamodb:PutItem",
+      "dynamodb:UpdateItem"
+    ]
   }
 }

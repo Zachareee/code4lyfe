@@ -4,4 +4,5 @@ mkdir %~dp0output
 set GOOS=linux
 set GOARCH=arm64
 set CGO_ENABLED=0
-for /D %%i in (src/handlers/*) do go build -C src/handlers/%%i -tags lambda.norpc -o ../../../output/%%i/bootstrap
+cd src/handlers
+for /D %%i in (*) do cd %%i && go get && go build -tags lambda.norpc -o ../../../output/%%i/bootstrap && cd ..
