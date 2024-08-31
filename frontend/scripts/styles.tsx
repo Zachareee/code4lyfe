@@ -3,21 +3,19 @@ import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingTop: 22,
-      paddingHorizontal: 10,
-      backgroundColor: '#558D97',
+      padding: 10,
+      backgroundColor: '#558B70',
     },
     card: {
-      alignItems:'center',
-      justifyContent: 'space-between',
       flexDirection: 'row',
-      backgroundColor: '#C4DDDE',
-      borderRadius: 8,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      backgroundColor: '#CADDE0',
+      borderTopRightRadius: 12,
+      borderTopLeftRadius: 12,
       padding: 10,
-      marginVertical: 5,
-      shadowColor: '#000',
-      shadowOpacity: 0.1,
-      shadowRadius: 5,
+      shadowOpacity: 0.2,
+      shadowRadius: 12,
       elevation: 3,
     },
     image: {
@@ -27,8 +25,11 @@ const styles = StyleSheet.create({
       marginRight: 15,
     },
     textContainer: {
-      justifyContent: 'center',
+      backgroundColor:'#99BFC6',
+      borderBottomStartRadius: 12,
+      borderBottomEndRadius: 12,
       flex: 1,
+      justifyContent: 'center',
     },
     nameText: {
       fontSize: 18,
@@ -39,10 +40,11 @@ const styles = StyleSheet.create({
       fontSize: 14,
       color: '#666',
       marginTop: 5,
+      textAlign: 'center'
     },
     separator: {
       height: 10,
     },
   });
-  
+
   export default styles;

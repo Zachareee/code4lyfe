@@ -30,19 +30,22 @@ const FlatListBasics = () => {
     <View style={styles.container}>
       <FlatList
         data={[
-          {key: 'Devin', surname: 'love'},
-          {key: 'Dan', surname: 'love'},
-          {key: 'Dominic', surname: 'love', info: 'aaaaa'},
-          {key: 'Jackson', surname: 'love'},
-          {key: 'James', surname: 'love'},
-          {key: 'Joel', surname: 'love', info: 'aaaaaaaaaaa'},
-          {key: 'John', surname: 'love'},
-          {key: 'Jillian', surname: 'love'},
-          {key: 'Jimmy', surname: 'love'},
-          {key: 'Julie', surname: 'love'},
+          { key: 'Lisinopril', surname: 'Morning', info: 'Take with water, avoid high potassium foods.' },
+          { key: 'Metformin', surname: 'Morning', info: 'Take with breakfast to reduce stomach upset.' },
+          { key: 'Atorvastatin', surname: 'Evening'},
+          { key: 'Furosemide', surname: 'Morning', info: 'Monitor blood pressure and kidney function.' },
+          { key: 'Amlodipine', surname: 'Morning'},
+          { key: 'Metoprolol', surname: 'Morning'},
+          { key: 'Senna', surname: 'Morning', info: 'Take with food to reduce gastric irritation.'},
+          { key: 'Simvastatin', surname: 'Morning'},
+          { key: 'Donepezil', surname: 'Morning', info: 'Take before bedtime, monitor for nausea.'},
+          { key: 'Warfarin', surname: 'Evening', info: 'Monitor INR levels regularly, avoid green leafy vegetables.' },
+          { key: 'Gabapentin', surname: 'Night', info: 'May cause drowsiness, do not operate heavy machinery.' },
+          { key: 'Omeprazole', surname: 'Morning', info: 'Take on an empty stomach before meals.' },
+          { key: 'Losartan', surname: 'Morning', info: 'Take with or without food, monitor blood pressure closely.' },
         ]}
 
-        renderItem={({item}) => <MedRow name = {item.key} image = {item.surname} info = {(item.info)} />}
+        renderItem={({item}) => <MedRow name = {item.key} image = {item.surname} info = {(item.info)}/>}
         ItemSeparatorComponent={() => <View style = {styles.separator}/>}
         // renderItem={({item}) => <Text style={styles.item}>{item.key} {item.surname}</Text>}
       />

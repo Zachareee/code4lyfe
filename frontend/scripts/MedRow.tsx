@@ -45,7 +45,7 @@ return (
     }> */}
     <TouchableOpacity onPress={()=> props.navigation.navigate('Med', { name: 'Jane' })}>
     <View style = {{flexDirection: "row", backgroundColor: "#FFFFFF"}}>
-      <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
+      <Image source={{uri: 'https://p7.hiclipart.com/preview/102/271/710/tablet-pharmaceutical-drug-capsule-iconfinder-pill-png.jpg'}}
       style={styles.image} />
       <Text style = {styles.nameText}>Hello {props.name} {props.image}!</Text>
     </View>
@@ -68,24 +68,32 @@ const MedRow = (props: medProps) => {
 if (props.info == null) {
   return (
     // <MedInnerRow name = {props.name} image = {props.image} />
-    <Text> Test </Text>
+    <View style= {[styles.card, {marginBottom:10, borderBottomStartRadius: 12, borderBottomEndRadius: 12}]}>
+      <Image source={{uri: 'https://p7.hiclipart.com/preview/102/271/710/tablet-pharmaceutical-drug-capsule-iconfinder-pill-png.jpg'}}
+      style={{width: 20, height: '100%'}} />
+      <Text> {props.name}</Text>
+      <Text> {props.image} </Text>
+    </View>
   )
 } else {
   return (
     // <Text> Yippee </Text>
     <View>
-      <View>
-        <Image source={{uri: 'https://reactjs.org/logo-og.png'}}
-        style={{width: 40, height: 0}} />
-        <Text>Hello {props.name} {props.image}!</Text>
+      <View style = {styles.card}>
+        <Image source={{uri: 'https://p7.hiclipart.com/preview/102/271/710/tablet-pharmaceutical-drug-capsule-iconfinder-pill-png.jpg'}}
+        style={{width: 20, height: '100%'}} />
         <Text> {props.name} </Text>
+        <Text> {props.image} </Text>
       </View>
-      <View style={styles.textContainer}>
+      <View style={[styles.textContainer, {marginBottom:10}]}>
         <Text style = {styles.infoText}> {props.info} </Text>
       </View>
     </View>
   );
 }
 }
+
+
+
 
 export default MedRow;
