@@ -9,3 +9,4 @@ for i in src/handlers/*; do
     go build -tags lambda.norpc -o ../../../output/$folder/bootstrap
 )&
 done
+wait

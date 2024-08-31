@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "lambda_policy" {
   }
 }
 
-data "aws_iam_policy_document" "dynamodb_policy" {
+data "aws_iam_policy_document" "lambda_policy_document" {
   statement {
     effect = "Allow"
 
@@ -45,5 +45,18 @@ data "aws_iam_policy_document" "dynamodb_policy" {
       "dynamodb:PutItem",
       "dynamodb:UpdateItem"
     ]
+
+    resources = ["*"]
   }
+}
+
+resource "aws_iam_policy" "dlpolicy" {
+  name = "dynamodb_lambda_policy"
+  description = "Policy used to get data"
+  policy = data.aws_iam_policy_document.lambda_policy_document.json
+}
+
+resource "aws_iam_role_policy_attachment" "attach" {
+  role = aws_iam_role.lambda_role.name
+  policy_arn = aws_iam_policy.dlpolicy.arn
 }
