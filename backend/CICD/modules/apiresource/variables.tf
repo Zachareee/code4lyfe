@@ -10,10 +10,18 @@ variable "parent_id" {
   type = string
 }
 
-variable "resource" {
+variable "methods" {
+  type = map(string)
+}
+
+variable "gateway_execution_arn" {
   type = string
 }
 
-variable "methods" {
-  type = list(string)
+variable "lambda_arn" {
+  type = string
+}
+
+variable "lambda_role" {
+  type = string
 }
