@@ -1,0 +1,15 @@
+{
+  "name": "lambdas",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "for %i in (handlers/*.ts) do esbuild handlers/%i --bundle --minify --platform=node --target=es2020 --outfile=../../output/%~ni/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "esbuild": "^0.23.1"
+  }
+}

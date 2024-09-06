@@ -18,12 +18,7 @@ variable "lambda_arn" {
   description = "Lambda arn"
 }
 
-variable "runtime" {
+variable "language" {
   type        = string
-  description = "The runtime environment of the lambda function"
-}
-
-variable "handler" {
-  type        = string
-  description = "Entrypoint of the lambda function"
+  description = "Language used"
 }

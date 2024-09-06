@@ -13,8 +13,7 @@ variable "parent_id" {
 variable "methods" {
   type = map(object({
     function_name = string
-    runtime       = string
-    handler       = string
+    language      = string
   }))
 }
 

@@ -1,8 +1,7 @@
 variable "paths" {
   type = map(map(object({
     function_name = string
-    runtime       = string
-    handler       = string
+    language      = string
   })))
 }
 

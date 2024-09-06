@@ -33,6 +33,5 @@ module "lambdamods" {
   gateway_execution_arn = var.gateway_execution_arn
   lambda_arn            = var.lambda_arn
   lambda_role           = var.lambda_role
-  runtime               = each.value.runtime
-  handler               = each.value.handler
+  language              = each.value.language
 }
