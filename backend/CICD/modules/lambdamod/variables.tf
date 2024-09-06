@@ -17,3 +17,13 @@ variable "lambda_arn" {
   type        = string
   description = "Lambda arn"
 }
+
+variable "runtime" {
+  type        = string
+  description = "The runtime environment of the lambda function"
+}
+
+variable "handler" {
+  type        = string
+  description = "Entrypoint of the lambda function"
+}

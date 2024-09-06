@@ -11,7 +11,11 @@ variable "parent_id" {
 }
 
 variable "methods" {
-  type = map(string)
+  type = map(object({
+    function_name = string
+    runtime       = string
+    handler       = string
+  }))
 }
 
 variable "gateway_execution_arn" {

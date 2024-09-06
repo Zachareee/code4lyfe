@@ -1,7 +1,7 @@
 package entities
 
 import (
-	"reflect"
+	"fmt"
 
 	"github.com/aws/aws-sdk-go/service/dynamodb"
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
@@ -9,10 +9,9 @@ import (
 )
 
 type Searchterm struct {
-	Keyname string
-	Key any
+	Keyname    string
+	Key        any
 	Properties []string
-	Returntype reflect.Type
 }
 
 type DynoDB struct {
@@ -52,7 +51,7 @@ func (d DynoDB) AddItemToTable(tablename string, item any) error {
 	return err
 }
 
-func (d DynoDB) FetchItems(tablename string, search Searchterm) ([]any, error) {
+func (d DynoDB) FetchItems(tablename string, search Searchterm) ([]interface{}, error) {
 	filter := expression.Name(search.Keyname).Equal(expression.Value(search.Key))
 	project := expression.ProjectionBuilder{}
 	for _, i := range search.Properties {
@@ -60,8 +59,14 @@ func (d DynoDB) FetchItems(tablename string, search Searchterm) ([]any, error) {
 	}
 
 	exp, _ := expression.NewBuilder().WithFilter(filter).WithProjection(project).Build()
+	service, err := d.getDB()
 
-	result, err := d.db.Scan(&dynamodb.ScanInput{
+	if err != nil {
+		fmt.Printf("Got error getting DB: %+v", err)
+		return nil, err
+	}
+
+	result, err := service.Scan(&dynamodb.ScanInput{
 		ExpressionAttributeNames:  exp.Names(),
 		ExpressionAttributeValues: exp.Values(),
 		FilterExpression:          exp.Filter(),
@@ -73,7 +78,7 @@ func (d DynoDB) FetchItems(tablename string, search Searchterm) ([]any, error) {
 		return nil, err
 	}
 
-	array := reflect.New(reflect.SliceOf(search.Returntype)).Interface().([]any)
+	array := []any{}
 
 	for _, i := range result.Items {
 		var item any

@@ -23,12 +23,12 @@ func HandleRequest(ctx context.Context, request events.APIGatewayProxyRequest) (
 	code, _ := rand.Int(rand.Reader, big.NewInt(1_000_000))
 	userID := "no"
 	intcode := int(code.Uint64())
-	item := types.CaregiverDependentPairing{
+	item := types.CaregiverCodePairing{
 		Caregiver: userID,
 		Code:      intcode,
 	}
 
-	err := entities.DynoDB{}.AddItemToTable(types.Names.CareDepPair, item)
+	err := entities.DynoDB{}.AddItemToTable(types.Names.CareCodePair, item)
 
 	if err != nil {
 		return events.APIGatewayProxyResponse{}, err
