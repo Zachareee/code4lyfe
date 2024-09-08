@@ -21,17 +21,17 @@ data "aws_iam_policy_document" "dynamodb_perms" {
       "logs:*"
     ]
 
-    resources = [ aws_dynamodb_table.CCP.arn ]
+    resources = ["*"]
   }
 }
 
 resource "aws_iam_policy" "dynamodb_policy" {
-  name = "dynamodb_lambda_policy"
+  name        = "dynamodb_lambda_policy"
   description = "Policy used to access dynamodb"
-  policy = data.aws_iam_policy_document.dynamodb_perms.json
+  policy      = data.aws_iam_policy_document.dynamodb_perms.json
 }
 
 resource "aws_iam_role_policy_attachment" "attach_dynamodb_lambda" {
-  role = aws_iam_role.lambda_role.name
+  role       = aws_iam_role.lambda_role.name
   policy_arn = aws_iam_policy.dynamodb_policy.arn
 }

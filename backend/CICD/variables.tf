@@ -1,24 +1,38 @@
-variable "paths" {
-  default = {
-    register = {
+variable "stage_name" {
+  type        = string
+  description = "The name of the deployment stage on apigateway"
+  default     = "local"
+}
+
+locals {
+  paths = {
+    "register" = {
       GET = {
-        function_name = "get-register",
+        function_name = "get-register"
         language      = "golang"
+        handler       = "bootstrap"
       }
       POST = {
-        function_name = "post-register",
+        function_name = "post-register"
         language      = "golang"
+        handler       = "bootstrap"
       }
     }
-    hello = {
+    "hello" = {
       GET = {
         function_name = "hello-world"
-        language      = "javascript"
+        language      = "typescript"
+        handler       = "index.handler"
+      }
+    }
+    "bye" = {
+      GET = {
+        function_name = "bye-world"
+        language      = "typescript"
+        handler       = "index.handler"
       }
     }
   }
-}
 
-variable "foldernames" {
-  default = ["typescript", "golang"]
+  foldernames = ["typescript", "golang"]
 }

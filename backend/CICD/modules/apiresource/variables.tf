@@ -14,6 +14,7 @@ variable "methods" {
   type = map(object({
     function_name = string
     language      = string
+    handler       = string
   }))
 }
 

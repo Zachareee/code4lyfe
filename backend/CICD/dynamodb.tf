@@ -1,22 +1,23 @@
 resource "aws_dynamodb_table" "CCP" {
-  name     = "CaregiverCodePair"
-  hash_key = "code"
-
-  attribute {
-    name = "code"
-    type = "N"
+  for_each = {
+    CaregiverCodePair = {
+      hash_key  = "code"
+      attr_name = "code"
+      attr_type      = "N"
+    }
+    CaregiverDependentPair = {
+      hash_key  = "dependent"
+      attr_name = "dependent"
+      attr_type = "N"
+    },
   }
 
-  billing_mode = "PAY_PER_REQUEST"
-}
-
-resource "aws_dynamodb_table" "CDP" {
-  name     = "CaregiverDependentPair"
-  hash_key = "dependent"
+  name     = each.key
+  hash_key = each.value.hash_key
 
   attribute {
-    name = "dependent"
-    type = "N"
+    name = each.value.attr_name
+    type = each.value.attr_type
   }
 
   billing_mode = "PAY_PER_REQUEST"

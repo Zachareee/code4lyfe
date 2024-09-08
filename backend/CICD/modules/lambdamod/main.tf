@@ -8,8 +8,8 @@ resource "aws_lambda_function" "function" {
   filename         = data.archive_file.file.output_path
   function_name    = var.function_name
   role             = var.lambda_arn
-  runtime          = local.config[var.language].runtime
-  handler          = local.config[var.language].handler
+  runtime          = local.config[var.language]
+  handler          = var.handler
   source_code_hash = data.archive_file.file.output_base64sha256
 }
 
