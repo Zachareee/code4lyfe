@@ -1,3 +1,3 @@
 output "gateway" {
-  value = "http://localhost:4566/restapis/${module.apigateway.gateway}/local/_user_request_"
+  value = terraform.workspace == "prod" ? aws_api_gateway_deployment.v1.invoke_url : "https://${aws_api_gateway_rest_api.api.id}.execute-api.localhost.localstack.cloud:4566/local/"
 }

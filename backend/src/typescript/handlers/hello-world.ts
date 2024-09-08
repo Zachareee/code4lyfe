@@ -1,6 +1,11 @@
-import { APIGatewayProxyEvent, Handler } from 'aws-lambda'
+import { APIGatewayProxyEvent, APIGatewayProxyResult, Handler } from 'aws-lambda'
 
-export const handler = <Handler<APIGatewayProxyEvent>> (async (event, context) => {
-    console.log('Event:\n', event)
-    return "Hello world"
+export const handler = <Handler<APIGatewayProxyEvent, APIGatewayProxyResult>>(async (event, context, done) => {
+    return {
+        statusCode: 200,
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ message: "Hello world" })
+    };
 })

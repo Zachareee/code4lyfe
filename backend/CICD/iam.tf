@@ -16,11 +16,6 @@ data "aws_iam_policy_document" "lambda_policy" {
 
 data "aws_iam_policy_document" "dynamodb_perms" {
   statement {
-    principals {
-      type        = "Service"
-      identifiers = ["lambda.amazonaws.com"]
-    }
-
     actions = [
       "dynamodb:*",
       "logs:*"

@@ -1,30 +1,25 @@
-locals {
-  paths = {
-    register = {
-      GET = {
-        function_name = "get-register",
-        language      = "golang"
-      }
-      POST = {
-        function_name = "post-register",
-        language      = "golang"
-      }
-    }
-    hello = {
-      GET = {
-        function_name = "hello-world"
-        language      = "javascript"
-      }
-    }
-  }
+resource "aws_api_gateway_rest_api" "api" {
+  name        = "DefaultAPI"
+  description = "The default API to use"
 }
 
-module "apigateway" {
-  source = "./modules/apigateway"
+resource "aws_api_gateway_deployment" "v1" {
+  rest_api_id = aws_api_gateway_rest_api.api.id
+  stage_name  = "local"
+  depends_on  = [module.apiresources]
+}
 
-  lambda_role = aws_iam_role.lambda_role.name
-  lambda_arn  = aws_iam_role.lambda_role.arn
-  paths       = local.paths
+module "apiresources" {
+  for_each = var.paths
+  source   = "./modules/apiresource"
+
+  rest_api_id           = aws_api_gateway_rest_api.api.id
+  gateway_execution_arn = aws_api_gateway_rest_api.api.execution_arn
+  parent_id             = aws_api_gateway_rest_api.api.root_resource_id
+  lambda_role           = aws_iam_role.lambda_role.name
+  lambda_arn            = aws_iam_role.lambda_role.arn
+  path_part             = each.key
+  methods               = each.value
 
   depends_on = [null_resource.build_script]
 }

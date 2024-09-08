@@ -19,8 +19,8 @@ resource "aws_api_gateway_integration" "method" {
   rest_api_id             = var.rest_api_id
   resource_id             = aws_api_gateway_resource.resource.id
   http_method             = each.value.http_method
-  integration_http_method = each.value.http_method
-  type                    = "AWS"
+  integration_http_method = "POST"
+  type                    = "AWS_PROXY"
 
   uri = module.lambdamods[each.key].invoke_arn
 }

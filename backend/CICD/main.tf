@@ -21,5 +21,5 @@ provider "aws" {
 }
 
 locals {
-  endpoint = terraform.workspace == "dev" ? "http://localhost:4566" : ""
+  endpoint = terraform.workspace == "prod" ? "" : "http://localhost:4566"
 }
