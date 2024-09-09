@@ -1,16 +1,5 @@
 resource "aws_dynamodb_table" "CCP" {
-  for_each = {
-    CaregiverCodePair = {
-      hash_key  = "code"
-      attr_name = "code"
-      attr_type      = "N"
-    }
-    CaregiverDependentPair = {
-      hash_key  = "dependent"
-      attr_name = "dependent"
-      attr_type = "N"
-    },
-  }
+  for_each = local.tables
 
   name     = each.key
   hash_key = each.value.hash_key
