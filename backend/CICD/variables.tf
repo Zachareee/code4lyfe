@@ -34,5 +34,10 @@ locals {
     }
   }
 
-  foldernames = ["typescript", "golang"]
+  foldernames = flatten([
+    for path, methodcollection in local.paths : [
+      for method, obj in methodcollection :
+      obj.language
+    ]
+  ])
 }
