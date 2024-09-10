@@ -1,8 +1,20 @@
+locals {
+  is_windows = length(regexall("^[a-z]:", lower(abspath(path.root)))) > 0
+}
+
+resource "null_resource" "refresh_folder" {
+  provisioner "local-exec" {
+    command = local.is_windows ? "rmdir /S /Q output && mkdir output" : "rm -rf output; mkdir output"
+    working_dir = ".."
+    when = create
+  }
+}
+
 resource "null_resource" "build_script" {
   for_each = toset(local.foldernames)
 
   provisioner "local-exec" {
-    command     = length(regexall("/home/", lower(abspath(path.root)))) > 0 ? "build.sh" : "build.bat"
+    command     =  local.is_windows ? "build.bat" : "./build.sh"
     working_dir = "../src/${each.key}/"
   }
 
@@ -11,6 +23,8 @@ resource "null_resource" "build_script" {
       for f in fileset("../src/${each.key}", "**") : filesha1("../src/${each.key}/${f}")
     ]))
   }
+
+  depends_on = [ null_resource.refresh_folder ]
 }
 
 resource "aws_api_gateway_rest_api" "api" {

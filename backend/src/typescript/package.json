@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "build": "for %i in (handlers/*.ts) do esbuild handlers/%i --bundle --minify --platform=node --target=es2020 --outfile=../../output/%~ni/index.js",
+    "cmd-build": "for %i in (handlers/*.ts) do esbuild handlers/%i --bundle --minify --platform=node --target=es2020 --outfile=../../output/%~ni/index.js",
+    "bash-build": "cd handlers; for i in *.ts; do filename=${i%%\\.ts}; esbuild $i --bundle --minify --platform=node --target=es2020 --outfile=../../../output/$filename/index.js; done",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
