@@ -4,9 +4,9 @@ locals {
 
 resource "null_resource" "refresh_folder" {
   provisioner "local-exec" {
-    command = local.is_windows ? "rmdir /S /Q output && mkdir output" : "rm -rf output; mkdir output"
+    command     = local.is_windows ? "rmdir /S /Q output && mkdir output" : "rm -rf output; mkdir output"
     working_dir = ".."
-    when = create
+    when        = create
   }
 }
 
@@ -14,7 +14,7 @@ resource "null_resource" "build_script" {
   for_each = toset(local.foldernames)
 
   provisioner "local-exec" {
-    command     =  local.is_windows ? "build.bat" : "./build.sh"
+    command     = local.is_windows ? "build.bat" : "./build.sh"
     working_dir = "../src/${each.key}/"
   }
 
@@ -24,7 +24,7 @@ resource "null_resource" "build_script" {
     ]))
   }
 
-  depends_on = [ null_resource.refresh_folder ]
+  depends_on = [null_resource.refresh_folder]
 }
 
 resource "aws_api_gateway_rest_api" "api" {
