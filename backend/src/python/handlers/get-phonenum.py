@@ -6,7 +6,7 @@ def lambda_handler(event: events.EventBridgeEvent, context: context_.Context) ->
     return {
         'statusCode': 200,
         'body': dumps({
-            'message': "Hey girl can I get yo number"
+            'message': "Finger lickin' good"
         }),
         'headers': {
             "Content-Type": "application/json"
