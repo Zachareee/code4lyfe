@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 locals {
   is_windows = length(regexall("^[a-z]:", lower(abspath(path.root)))) > 0
 }
@@ -27,6 +28,8 @@ resource "null_resource" "build_script" {
   depends_on = [null_resource.refresh_folder]
 }
 
+=======
+>>>>>>> ee85908a8652ba7fcd44ae0f9c4d773978a59e6a
 resource "aws_api_gateway_rest_api" "api" {
   name        = "DefaultAPI"
   description = "The default API to use"

@@ -3,11 +3,6 @@ variable "function_name" {
   description = "The name of the lambda function"
 }
 
-variable "handler" {
-  type        = string
-  description = "The handler name"
-}
-
 variable "gateway_execution_arn" {
   type        = string
   description = "Execution ARN of gateway rest api"
