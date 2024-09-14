@@ -28,3 +28,7 @@ variable "lambda_arn" {
 variable "lambda_role" {
   type = string
 }
+
+variable "lambda_layers" {
+  type = list(string)
+}
