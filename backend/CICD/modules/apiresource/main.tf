@@ -34,5 +34,5 @@ module "lambdamods" {
   lambda_arn            = var.lambda_arn
   lambda_role           = var.lambda_role
   language              = each.value.language
-  lambda_layers         = var.lambda_layers
+  #lambda_layers         = var.lambda_layers
 }

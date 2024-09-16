@@ -11,3 +11,4 @@ export const handler = <Handler<APIGatewayProxyEvent, APIGatewayProxyResult>>(as
         body: JSON.stringify({ message: `${name} ${bye}` })
     };
 })
+

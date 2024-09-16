@@ -18,10 +18,10 @@ variable "lambda_arn" {
   description = "Lambda arn"
 }
 
-variable "lambda_layers" {
-  type        = list(string)
-  description = "List of lambda layers to attach"
-}
+#variable "lambda_layers" {
+#  type        = list(string)
+#  description = "List of lambda layers to attach"
+#}
 
 variable "language" {
   type        = string

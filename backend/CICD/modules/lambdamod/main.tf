@@ -11,7 +11,7 @@ resource "aws_lambda_function" "function" {
   runtime          = local.config[var.language].runtime
   handler          = local.config[var.language].handler
   source_code_hash = data.archive_file.file.output_base64sha256
-  layers           = var.lambda_layers
+  #layers           = var.lambda_layers
 }
 
 resource "aws_lambda_permission" "apigw_lambda" {
